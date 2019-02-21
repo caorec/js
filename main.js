@@ -1,10 +1,28 @@
 const Phrase = require("palindrome-caorec");
 
-let string = prompt("Please enter a string for palindrome testing:");
-let phraseItem = new Phrase(string);
+function palindromeTester() {
+  event.preventDefault();
 
-if (phraseItem.palindrome()) {
-  alert(`"${phraseItem.content}" is a palindrome!`);
-} else {
-  alert(`"${phraseItem.content}" is not a palindrome.`)
+  let phraseItem = new Phrase(event.target.phraseGet.value);
+  let palindromeResult = document.querySelector("#palindromeResult");
+  console.log(phraseItem.content);
+
+  if (phraseItem.content) {
+
+    if (phraseItem.palindrome()) {
+      palindromeResult.innerHTML = `<strong>"${phraseItem.content}"</strong> is a palindrome!`;
+    } else {
+      palindromeResult.innerHTML = `<strong>"${phraseItem.content}"</strong> is not a palindrome.`;
+    }
+
+  } else {
+    palindromeResult.innerHTML = `It is an empty string!`;
+  }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  let tester = document.querySelector("#palindromeTester");
+  tester.addEventListener("submit", function(event) {
+    palindromeTester(event);
+  });
+});

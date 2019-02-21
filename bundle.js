@@ -1,14 +1,31 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const Phrase = require("palindrome-caorec");
 
-let string = prompt("Please enter a string for palindrome testing:");
-let phraseItem = new Phrase(string);
+function palindromeTester() {
+  event.preventDefault();
 
-if (phraseItem.palindrome()) {
-  alert(`"${phraseItem.content}" is a palindrome!`);
-} else {
-  alert(`"${phraseItem.content}" is not a palindrome.`)
+  let phraseItem = new Phrase(event.target.phraseGet.value);
+  let palindromeResult = document.querySelector("#palindromeResult");
+  console.log(phraseItem.content);
+
+  if (phraseItem.content) {
+
+    if (phraseItem.palindrome()) {
+      palindromeResult.innerHTML = `<strong>"${phraseItem.content}"</strong> is a palindrome!`;
+    } else {
+      palindromeResult.innerHTML = `<strong>"${phraseItem.content}"</strong> is not a palindrome.`;
+    }
+  } else {
+    palindromeResult.innerHTML = `It is an empty string`;
+  }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  let tester = document.querySelector("#palindromeTester");
+  tester.addEventListener("submit", function(event) {
+    palindromeTester(event);
+  });
+});
 
 },{"palindrome-caorec":2}],2:[function(require,module,exports){
 module.exports = Phrase;

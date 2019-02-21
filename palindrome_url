@@ -1,0 +1,14 @@
+#!/usr/bin/node
+
+const request = require("request");
+const Phrase = require('palindrome-caorec');
+const url = 'https://cdn.learnenough.com/phrases.txt'
+
+request(url, function(err, response, body) {
+  body.split("\n").forEach(function(line) {
+    phrase = new Phrase(line);
+    if (phrase.palindrome()) {
+      console.log("palindrome detected:", line);
+    }
+  });
+});

@@ -1,0 +1,14 @@
+#!/usr/bin/node
+
+const fs = require('fs');
+const Phrase = require('palindrome-caorec');
+
+const text = fs.readFileSync("phrases.txt", "utf-8")
+text.split("\n").forEach(function(line) {
+  let phraseItem = new Phrase(line);
+  if (phraseItem.palindrome()) {
+    fs.appendFile("palindrome.txt",`${line}\n`, (err) => {
+      if (err) throw err;
+    });
+  }
+});
